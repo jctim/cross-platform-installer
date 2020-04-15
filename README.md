@@ -9,4 +9,6 @@ The project is aimed to pack executable jar file with external (non-bundled) res
 - the installer is created **target/${finalName}-installer.jar**
 
 ## Screenshots 
-
+![mac screenthos](./docs/shot_mac.png)
+![linux screenthos](./docs/shot_linux.png)
+![windows screenthos](./docs/shot_windows.png)
