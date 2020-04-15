@@ -13,12 +13,10 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <junit.version>4.11</junit.version>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
-        <maven.izpack.plugin.version>5.1.1
-        </maven.izpack.plugin.version> <!-- this version doesn't fail uninstaller on Windows -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- this version doesn't fail uninstaller on Windows -->
+        <maven.izpack.plugin.version>5.1.1</maven.izpack.plugin.version>
 
         <!-- Installer variables -->
         <staging.dir>${basedir}/assets</staging.dir>
@@ -29,41 +27,12 @@
         <jar.name>start.jar</jar.name>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependencies/>
 
     <build>
         <finalName>start</finalName>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.plugin.version}</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.upwork.jctim.App</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.izpack</groupId>
                 <artifactId>izpack-maven-plugin</artifactId>
@@ -79,8 +48,6 @@
                     <autoIncludeDevelopers>false</autoIncludeDevelopers>
                 </configuration>
             </plugin>
-
         </plugins>
-
     </build>
 </project>
