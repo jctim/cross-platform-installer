@@ -1,0 +1,83 @@
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
+    <info>
+        <appname>@{info.appName}</appname>
+        <appversion>@{info.appVersion}</appversion>
+        <appsubpath>@{info.appsubpath}</appsubpath>
+        <javaversion>1.8</javaversion>
+
+        <run-privileged condition="izpack.windowsinstall"/>
+        <uninstaller write="yes"/>
+    </info>
+
+    <variables>
+        <variable name="JAR_APP" value="@{jar.name}"/>
+    </variables>
+
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+
+    <resources>
+        <res id="LicencePanel.licence" src="@{izpack.dir.app}/licence.txt"/>
+        <res id="Win_shortcutSpec.xml" src="@{izpack.dir.app}/win_shortcut_spec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="@{izpack.dir.app}/unix_shortcut_spec.xml"/>
+        <res id="CustomLangPack.xml" src="@{izpack.dir.app}/lang_pack.xml"/>
+    </resources>
+
+    <guiprefs width="800" height="600" resizable="no">
+        <laf name="substance">
+            <os family="windows"/>
+            <os family="unix"/>
+            <param name="variant" value="mist-silver"/>
+        </laf>
+        <laf name="substance">
+            <os family="mac"/>
+            <param name="variant" value="mist-aqua"/>
+        </laf>
+        <modifier key="useHeadingPanel" value="yes"/>
+    </guiprefs>
+
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel" condition="showShortcutPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+
+    <packs>
+        <pack name="@{info.appName}" required="yes">
+            <description>The application itself</description>
+            <fileset dir="." targetdir="${INSTALL_PATH}" override="true"/>
+        </pack>
+    </packs>
+
+    <natives>
+        <native type="izpack" name="ShellLink.dll"/>
+        <native type="izpack" name="ShellLink_x64.dll"/>
+    </natives>
+
+    <conditions>
+        <condition type="java" id="showShortcutPanel">
+            <java>
+                <class>com.izforge.izpack.util.OsVersion</class>
+                <field>IS_MAC</field>
+            </java>
+            <returnvalue type="boolean">false</returnvalue>
+        </condition>
+        <condition type="java" id="writeUninstaller">
+            <java>
+                <class>com.izforge.izpack.util.OsVersion</class>
+                <field>IS_WINDOWS</field>
+            </java>
+            <returnvalue type="boolean">false</returnvalue>
+        </condition>
+    </conditions>
+
+</izpack:installation>

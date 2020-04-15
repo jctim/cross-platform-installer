@@ -1,0 +1,33 @@
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+
+    <skipIfNotSupported/>
+    <programGroup defaultName="$APP_NAME"/>
+    <shortcut name="$APP_NAME"
+              target="$INSTALL_PATH/$JAR_APP"
+              workingDirectory="$INSTALL_PATH"
+              desktop="yes"
+              programGroup="yes"
+              applications="no"
+              startMenu="no"
+              startup="no">
+        <createForPack name="$APP_NAME"/>
+    </shortcut>
+
+    <shortcut
+            name="$APP_NAME Uninstaller"
+            target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
+            desktop="no"
+            programGroup="yes"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            iconFile="%SystemRoot%\system32\SHELL32.dll"
+            iconIndex="31">
+        <createForPack name="$APP_NAME"/>
+    </shortcut>
+
+
+</izpack:shortcuts>
