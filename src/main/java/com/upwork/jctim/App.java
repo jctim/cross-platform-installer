@@ -14,9 +14,8 @@ public class App {
 
         File currentDir = new File(".");
         File folderDir = new File("./folder");
-//         File folderDir = new File("./src/main/resources/folder");
-        System.out.println("And I have those resources in my .: " + Arrays.toString(currentDir.list()));
-        System.out.println("And I have those resources in my ./folder: " + Arrays.toString(folderDir.list()));
+        System.out.println("And I have such file in . : " + Arrays.toString(currentDir.list()));
+        System.out.println("And I have such file in ./folder : " + Arrays.toString(folderDir.list()));
 
         showSimpleGui(folderDir.listFiles());
     }
