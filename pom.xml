@@ -3,50 +3,69 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.upwork.jctim</groupId>
-    <artifactId>uw-cross-platfrom-installer</artifactId>
+    <artifactId>cross-platfrom-installer</artifactId>
 
-    <packaging>izpack-jar</packaging>
+    <packaging>jar</packaging>
 
     <version>1.0-SNAPSHOT</version>
-    <name>uw-cross-platfrom-installer</name>
+    <name>cross-platfrom-installer</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- this version doesn't fail uninstaller on Windows -->
-        <maven.izpack.plugin.version>5.1.1</maven.izpack.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.javapackager.plugin.version>0.9.4</maven.javapackager.plugin.version>
 
         <!-- Installer variables -->
-        <staging.dir>${basedir}/assets</staging.dir>
-        <izpack.dir.app>${basedir}/src/main/izpack</izpack.dir.app>
+        <staging.dir>${basedir}/staging</staging.dir>
+        <assets.dir>${basedir}/assets</assets.dir>
         <info.appName>StartApp</info.appName>
         <info.appVersion>1.0</info.appVersion>
         <info.appsubpath>com.upwork.jctim</info.appsubpath>
-        <jar.name>start.jar</jar.name>
+        <runnable.jar.name>start.jar</runnable.jar.name>
+        <javapackager.platform>auto</javapackager.platform>
     </properties>
-
-    <dependencies/>
 
     <build>
         <finalName>start</finalName>
-
         <plugins>
             <plugin>
-                <groupId>org.codehaus.izpack</groupId>
-                <artifactId>izpack-maven-plugin</artifactId>
-                <version>${maven.izpack.plugin.version}</version>
-                <extensions>true</extensions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <baseDir>${staging.dir}</baseDir>
-                    <installFile>${izpack.dir.app}/install.xml</installFile>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                    <finalName>${project.build.finalName}-installer</finalName>
-                    <mkdirs>true</mkdirs>
-                    <autoIncludeUrl>false</autoIncludeUrl>
-                    <autoIncludeDevelopers>false</autoIncludeDevelopers>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>${maven.javapackager.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <name>${info.appName}</name>
+                            <displayName>${info.appName}</displayName>
+                            <mainClass>com.upwork.jctim.DummyApp</mainClass>
+                            <bundleJre>false</bundleJre> <!-- TODO true? -->
+                            <generateInstaller>true</generateInstaller>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>${javapackager.platform}</platform>
+                            <runnableJar>${staging.dir}/${runnable.jar.name}</runnableJar>
+                            <additionalResources>
+                                <param>${staging.dir}/folder</param>
+                            </additionalResources>
+                            <licenseFile>${staging.dir}/licence.txt</licenseFile>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
