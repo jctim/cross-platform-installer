@@ -6,6 +6,6 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-/.idea/
-/app.iml
-/upwork.txt
+.idea/
+*.iml
+upwork.txt

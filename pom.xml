@@ -3,12 +3,12 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.upwork.jctim</groupId>
-    <artifactId>app</artifactId>
+    <artifactId>uw-cross-platfrom-installer</artifactId>
 
     <packaging>izpack-jar</packaging>
 
     <version>1.0-SNAPSHOT</version>
-    <name>app</name>
+    <name>uw-cross-platfrom-installer</name>
     <url>http://maven.apache.org</url>
 
     <properties>
