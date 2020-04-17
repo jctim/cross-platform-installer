@@ -14,6 +14,7 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
 
         <!-- Installer variables -->
@@ -30,6 +31,15 @@
     <build>
         <finalName>${app.name}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -67,6 +77,11 @@
                                 <argument>-nosign</argument>
                                 <argument>-BappVersion=${app.version}</argument>
                                 <argument>-BlicenseFile=${app.licence}</argument>
+                                <!-- platform-specific args/properties -->
+                                <argument>-BmenuHint=true</argument>
+                                <argument>-BshortcutHint=true</argument>
+                                <argument>-BsystemWide=true</argument>
+                                <argument>-Bwin.menuGroup=${app.subpath}</argument>
                                 <!--                                <argument>-Bicon=${project.build.directory}/classes/${application.title}.ico</argument>-->
                                 <!--                                <argument>-BappVersion=${project.version}</argument>-->
                                 <!--                                <argument>-Bcopyright='2015 AutoAp, Inc.'</argument>-->
