@@ -78,18 +78,15 @@
                                 <argument>-BappVersion=${app.version}</argument>
                                 <argument>-BlicenseFile=${app.licence}</argument>
                                 <!-- platform-specific args/properties -->
-                                <argument>-BmenuHint=true</argument>
-                                <argument>-BshortcutHint=true</argument>
-                                <argument>-BsystemWide=true</argument>
-                                <argument>-Bwin.menuGroup=${app.subpath}</argument>
-                                <!--                                <argument>-Bicon=${project.build.directory}/classes/${application.title}.ico</argument>-->
-                                <!--                                <argument>-BappVersion=${project.version}</argument>-->
-                                <!--                                <argument>-Bcopyright='2015 AutoAp, Inc.'</argument>-->
-                                <!--                                <argument>-BshortcutHint=true</argument>-->
-                                <!--                                <argument>-BsystemWide=false</argument>-->
-                                <!--                                <argument>-Bwin.menuGroup=${organization.name}</argument>-->
-                                <!--                                <argument>-Bvendor=${organization.name}</argument>-->
-                                <!--                                <argument>-v</argument>-->
+                                <argument>-BmenuHint=true</argument> <!-- windows -->
+                                <argument>-BshortcutHint=true</argument> <!-- windows -->
+                                <argument>-BsystemWide=true</argument>  <!-- windows / mac -->
+                                <argument>-Bwin.menuGroup=${app.subpath}</argument> <!-- windows -->
+                                <argument>-Bcategory=Utility</argument>  <!-- linux -->
+                                <!--<argument>-Bicon=${project.build.directory}/classes/${application.name}.ico</argument> For OS X, the format must be .icns. For Linux, the format must be .png.  For Windows, the format must be .ico. -->
+                                <!--<argument>-Bcopyright='2020 MyGreatApp'</argument>-->
+                                <!--<argument>-Bvendor=${app.subpath}</argument>-->
+                                <!--<argument>-v</argument>-->
                             </arguments>
                         </configuration>
                     </execution>
