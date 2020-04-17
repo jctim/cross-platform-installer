@@ -14,55 +14,68 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.javapackager.plugin.version>0.9.4</maven.javapackager.plugin.version>
+        <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
 
         <!-- Installer variables -->
-        <staging.dir>${basedir}/staging</staging.dir>
         <assets.dir>${basedir}/assets</assets.dir>
-        <info.appName>StartApp</info.appName>
-        <info.appVersion>1.0</info.appVersion>
-        <info.appsubpath>com.upwork.jctim</info.appsubpath>
-        <runnable.jar.name>start.jar</runnable.jar.name>
-        <javapackager.platform>auto</javapackager.platform>
+        <app.name>MyGreatApp</app.name>
+        <app.version>1.0</app.version>
+        <app.subpath>com.upwork.jctim</app.subpath>
+        <app.runnable.jar>start.jar</app.runnable.jar>
+        <app.mainClass>com.upwork.jctim.App</app.mainClass>
+        <app.resources.dir>folder</app.resources.dir>
+        <app.licence>licence.txt</app.licence>
     </properties>
 
     <build>
-        <finalName>start</finalName>
+        <finalName>${app.name}</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.github.fvarrui</groupId>
-                <artifactId>javapackager</artifactId>
-                <version>${maven.javapackager.plugin.version}</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec.maven.plugin.version}</version>
                 <executions>
+                    <!-- Deploy a native version -->
                     <execution>
+                        <id>deploy</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>package</goal>
+                            <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <name>${info.appName}</name>
-                            <displayName>${info.appName}</displayName>
-                            <mainClass>com.upwork.jctim.DummyApp</mainClass>
-                            <bundleJre>false</bundleJre> <!-- TODO true? -->
-                            <generateInstaller>true</generateInstaller>
-                            <administratorRequired>false</administratorRequired>
-                            <platform>${javapackager.platform}</platform>
-                            <runnableJar>${staging.dir}/${runnable.jar.name}</runnableJar>
-                            <additionalResources>
-                                <param>${staging.dir}/folder</param>
-                            </additionalResources>
-                            <licenseFile>${staging.dir}/licence.txt</licenseFile>
+                            <executable>javapackager</executable>
+                            <arguments>
+                                <argument>-deploy</argument>
+                                <argument>-appclass</argument>
+                                <argument>${app.mainClass}</argument>
+                                <argument>-native</argument>
+                                <argument>installer</argument>
+                                <argument>-srcdir</argument>
+                                <argument>${assets.dir}</argument>
+                                <argument>-srcfiles</argument>
+                                <argument>${app.runnable.jar}</argument>
+                                <argument>-srcfiles</argument>
+                                <argument>${app.resources.dir}</argument>
+                                <argument>-srcfiles</argument>
+                                <argument>${app.licence}</argument>
+                                <argument>-outdir</argument>
+                                <argument>${project.build.directory}/dist</argument>
+                                <argument>-outfile</argument>
+                                <argument>${app.name}-installer</argument>
+                                <argument>-name</argument>
+                                <argument>${app.name}</argument>
+                                <argument>-nosign</argument>
+                                <argument>-BappVersion=${app.version}</argument>
+                                <argument>-BlicenseFile=${app.licence}</argument>
+                                <!--                                <argument>-Bicon=${project.build.directory}/classes/${application.title}.ico</argument>-->
+                                <!--                                <argument>-BappVersion=${project.version}</argument>-->
+                                <!--                                <argument>-Bcopyright='2015 AutoAp, Inc.'</argument>-->
+                                <!--                                <argument>-BshortcutHint=true</argument>-->
+                                <!--                                <argument>-BsystemWide=false</argument>-->
+                                <!--                                <argument>-Bwin.menuGroup=${organization.name}</argument>-->
+                                <!--                                <argument>-Bvendor=${organization.name}</argument>-->
+                                <!--                                <argument>-v</argument>-->
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
