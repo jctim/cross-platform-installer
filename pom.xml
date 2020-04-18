@@ -12,21 +12,164 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>14</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
 
-        <!-- Installer variables -->
-        <assets.dir>${basedir}/assets</assets.dir>
-        <app.name>MyGreatApp</app.name>
-        <app.version>1.0</app.version>
-        <app.subpath>com.upwork.jctim</app.subpath>
-        <app.runnable.jar>start.jar</app.runnable.jar>
-        <app.mainClass>com.upwork.jctim.App</app.mainClass>
-        <app.resources.dir>folder</app.resources.dir>
-        <app.licence>licence.txt</app.licence>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.properties.plugin.version>1.0.0</maven.properties.plugin.version>
+        <maven.exec.plugin.version>1.6.0</maven.exec.plugin.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>platform-mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${maven.exec.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>createjar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>jpackage</executable>
+                                    <arguments>
+                                        <argument>--type</argument>
+                                        <argument>${mac.package.type}</argument>
+                                        <argument>--name</argument>
+                                        <argument>${app.name}</argument>
+                                        <argument>--app-version</argument>
+                                        <argument>${app.version}</argument>
+                                        <argument>--main-class</argument>
+                                        <argument>${app.mainClass}</argument>
+                                        <argument>--main-jar</argument>
+                                        <argument>${app.mainJar}</argument>
+                                        <argument>--input</argument>
+                                        <argument>${project.basedir}/assets</argument>
+                                        <argument>--dest</argument>
+                                        <argument>${project.build.directory}/dist</argument>
+                                        <argument>--license-file</argument>
+                                        <argument>${project.basedir}/assets/${app.licence}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>platform-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${maven.exec.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>createjar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>jpackage</executable>
+                                    <arguments>
+                                        <argument>--type</argument>
+                                        <argument>${win.package.type}</argument>
+                                        <argument>--name</argument>
+                                        <argument>${app.name}</argument>
+                                        <argument>--app-version</argument>
+                                        <argument>${app.version}</argument>
+                                        <argument>--main-class</argument>
+                                        <argument>${app.mainClass}</argument>
+                                        <argument>--main-jar</argument>
+                                        <argument>${app.mainJar}</argument>
+                                        <argument>--input</argument>
+                                        <argument>${project.basedir}/assets</argument>
+                                        <argument>--dest</argument>
+                                        <argument>${project.build.directory}/dist</argument>
+                                        <argument>--license-file</argument>
+                                        <argument>${project.basedir}/assets/${app.licence}</argument>
+                                        <argument>--win-dir-chooser</argument>
+                                        <argument>--win-shortcut</argument>
+                                        <argument>--win-menu-group</argument>
+                                        <argument>${win.menu.group}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>platform-linux</id>
+            <activation>
+                <os>
+                    <family>linux</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${maven.exec.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>createjar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>jpackage</executable>
+                                    <arguments>
+                                        <argument>--type</argument>
+                                        <argument>${linux.package.type}</argument>
+                                        <argument>--name</argument>
+                                        <argument>${app.name}</argument>
+                                        <argument>--app-version</argument>
+                                        <argument>${app.version}</argument>
+                                        <argument>--main-class</argument>
+                                        <argument>${app.mainClass}</argument>
+                                        <argument>--main-jar</argument>
+                                        <argument>${app.mainJar}</argument>
+                                        <argument>--input</argument>
+                                        <argument>${project.basedir}/assets</argument>
+                                        <argument>--dest</argument>
+                                        <argument>${project.build.directory}/dist</argument>
+                                        <argument>--license-file</argument>
+                                        <argument>${project.basedir}/assets/${app.licence}</argument>
+                                        <argument>--linux-shortcut</argument>
+                                        <argument>--linux-menu-group</argument>
+                                        <argument>${linux.menu.group}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <finalName>${app.name}</finalName>
@@ -42,52 +185,18 @@
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec.maven.plugin.version}</version>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>${maven.properties.plugin.version}</version>
                 <executions>
-                    <!-- Deploy a native version -->
                     <execution>
-                        <id>deploy</id>
-                        <phase>package</phase>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>exec</goal>
+                            <goal>read-project-properties</goal>
                         </goals>
                         <configuration>
-                            <executable>javapackager</executable>
-                            <arguments>
-                                <argument>-deploy</argument>
-                                <argument>-appclass</argument>
-                                <argument>${app.mainClass}</argument>
-                                <argument>-native</argument>
-                                <argument>installer</argument>
-                                <argument>-srcdir</argument>
-                                <argument>${assets.dir}</argument>
-                                <argument>-srcfiles</argument>
-                                <argument>${app.runnable.jar}</argument>
-                                <argument>-srcfiles</argument>
-                                <argument>${app.resources.dir}</argument>
-                                <argument>-srcfiles</argument>
-                                <argument>${app.licence}</argument>
-                                <argument>-outdir</argument>
-                                <argument>${project.build.directory}/dist</argument>
-                                <argument>-outfile</argument>
-                                <argument>${app.name}-installer</argument>
-                                <argument>-name</argument>
-                                <argument>${app.name}</argument>
-                                <argument>-nosign</argument>
-                                <argument>-BappVersion=${app.version}</argument>
-                                <argument>-BlicenseFile=${app.licence}</argument>
-                                <!-- platform-specific args/properties -->
-                                <argument>-BmenuHint=true</argument> <!-- windows -->
-                                <argument>-BshortcutHint=true</argument> <!-- windows -->
-                                <argument>-BsystemWide=true</argument>  <!-- windows / mac -->
-                                <argument>-Bwin.menuGroup=${app.subpath}</argument> <!-- windows -->
-                                <argument>-Bcategory=Utility</argument>  <!-- linux -->
-                                <!--<argument>-Bicon=${project.build.directory}/classes/${application.name}.ico</argument> For OS X, the format must be .icns. For Linux, the format must be .png.  For Windows, the format must be .ico. -->
-                                <!--<argument>-Bcopyright='2020 MyGreatApp'</argument>-->
-                                <!--<argument>-Bvendor=${app.subpath}</argument>-->
-                                <!--<argument>-v</argument>-->
-                            </arguments>
+                            <files>
+                                <file>${project.basedir}/jpackage.properties</file>
+                            </files>
                         </configuration>
                     </execution>
                 </executions>
