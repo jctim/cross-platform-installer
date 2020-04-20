@@ -1,0 +1,10 @@
+--name ${app.name}
+--app-version ${app.version}
+--main-class ${app.mainClass}
+--main-jar ${app.mainJar}
+--input ${project.basedir}/assets
+--dest ${project.build.directory}/dist
+--license-file ${project.basedir}/assets/${app.licence}
+--java-options "\"-Duser.dir=\$APPDIR\"
+--linux-shortcut
+--linux-menu-group ${app.menu.group}

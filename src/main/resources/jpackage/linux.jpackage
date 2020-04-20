@@ -1,0 +1,11 @@
+--name ${app.name}
+--app-version ${app.version}
+--main-class ${app.mainClass}
+--main-jar ${app.mainJar}
+--input ${project.basedir}/assets
+--dest ${project.build.directory}/dist
+--license-file ${project.basedir}/assets/${app.licence}
+--java-options "\"-Duser.dir=\$APPDIR\"
+--win-dir-chooser
+--win-shortcut
+--win-menu-group ${app.menu.group}
