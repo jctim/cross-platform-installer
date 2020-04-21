@@ -42,7 +42,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}/bin/jpackage</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/mac.jpackage</argument>
                                         <argument>--type</argument>
@@ -57,7 +57,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}/bin/jpackage</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/mac.jpackage</argument>
                                         <argument>--type</argument>
@@ -91,7 +91,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}\bin\jpackage.exe</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/windows.jpackage</argument>
                                         <argument>--type</argument>
@@ -106,7 +106,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}\bin\jpackage.exe</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/windows.jpackage</argument>
                                         <argument>--type</argument>
@@ -140,7 +140,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}/bin/jpackage</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/linux.jpackage</argument>
                                         <argument>--type</argument>
@@ -155,7 +155,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>jpackage</executable>
+                                    <executable>${java.home}/bin/jpackage</executable>
                                     <arguments>
                                         <argument>@${project.build.outputDirectory}/jpackage/linux.jpackage</argument>
                                         <argument>--type</argument>
