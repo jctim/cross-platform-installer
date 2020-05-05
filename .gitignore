@@ -1,7 +1,4 @@
 target/
-dist/
-release.properties
-buildNumber.properties
 .idea/
 *.iml
 upwork.txt

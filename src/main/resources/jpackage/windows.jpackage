@@ -6,5 +6,7 @@
 --dest ${project.build.directory}/dist
 --license-file ${project.basedir}/assets/${app.licence}
 --java-options "\"-Duser.dir=\$APPDIR\"
---linux-shortcut
---linux-menu-group ${app.menu.group}
+--win-dir-chooser
+--win-shortcut
+--win-menu
+--win-menu-group ${app.menu.group}

@@ -134,7 +134,7 @@
                         <version>${maven.exec.plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>create-windows-deb</id>
+                                <id>create-linux-deb</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>exec</goal>
@@ -149,7 +149,7 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>create-windows-rpm</id>
+                                <id>create-linux-rpm</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>exec</goal>

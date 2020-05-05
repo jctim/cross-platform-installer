@@ -1,5 +1,5 @@
 --name ${app.name}
---app-version ${app.version} 
+--app-version ${app.version}
 --main-class ${app.mainClass}
 --main-jar ${app.mainJar}
 --input ${project.basedir}/assets
